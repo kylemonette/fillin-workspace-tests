@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pretext xml:lang="en-US" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <article xml:id="fillin-workspace-test">
+    <title>Fillin Workspace Test</title>
+    <worksheet xml:id="worksheet-convergence" label="worksheet-convergence">
+      <title>Convergence Tests</title>
+      <introduction>
+        <p>Ignored here, not in an exercise: <fillin characters="8" workspace="1in"/>.</p>
+      </introduction>
+      <exercise>
+        <statement>
+          <p>Complete the table.</p>
+          <tabular top="major" bottom="minor" left="minor" right="minor">
+            <col right="minor"/>
+            <col right="minor"/>
+            <col/>
+            <row header="yes" bottom="minor">
+              <cell>Test</cell>
+              <cell>Hypotheses</cell>
+              <cell>Conclusion</cell>
+            </row>
+            <row bottom="minor">
+              <cell>Ratio test</cell>
+              <cell><fillin characters="30" workspace="1in"/></cell>
+              <cell><fillin characters="24" workspace="1in"/></cell>
+            </row>
+            <row bottom="minor" valign="top">
+              <cell>Root test</cell>
+              <cell><fillin characters="30" workspace="1.5in"/></cell>
+              <cell><fillin characters="24" workspace="1.5in"/></cell>
+            </row>
+            <row valign="bottom">
+              <cell>Integral test</cell>
+              <cell><fillin characters="30" workspace="2cm"/></cell>
+              <cell><fillin characters="24" workspace="2cm"/></cell>
+            </row>
+          </tabular>
+          <p>An ordinary blank still works: <fillin characters="6"/>.</p>
+                <p>
+          Testing mathematics:
+      </p>
+      <p><m>x = <fillin workspace="1in"/></m></p>
+        </statement>
+        <solution>
+          <p>Ignored in a solution: <fillin workspace="1in"/>.</p>
+        </solution>
+      </exercise>
+    </worksheet>
+
+
+
+    <section xml:id="section-not-printout" label="section-not-printout">
+      <title>Not a Printout</title>
+      <exercise>
+        <statement>
+          <p>Ignored outside a printout: <fillin characters="8" workspace="1in"/>.</p>
+        </statement>
+      </exercise>
+
+ <exercise>
+                    <statement>
+                        <p>
+                          <ul>
+                            <li><p>Inside inline math (short, space for <m>x</m>): <m>\sin(<fillin fill="x"/>)</m></p></li>
+
+                            <li><p>Inside inline math (default, space for <m>XXX</m>): <m>\sin(<fillin/>)</m></p></li>
+
+                            <li><p>Inside exponents and subscripts (each is space for the string <q>12</q>).  In this case, be sure to wrap your exponents and subscripts in braces, as would be good <latex/> practice anyway: <m>x^{5+<fillin fill="12"/>}\,y_{<fillin fill="12"/>}</m></p></li>
+
+                            <li><p>Inside inline math (too long for this line probably, 40 characters long): <m>\tan(<fillin fill="Mxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"/>)</m></p></li>
+
+                            <li><p>So use inside a displayed equation<md>16\log\space<fillin fill="1-x^2"/></md>like this one.</p></li>
+
+                            <li><p>Inside the second line of a multi-line display:<md>
+                                <mrow>y &amp;= x^7\,x^8</mrow>
+                                <mrow>  &amp;= x^{<fillin fill="15"/>}</mrow>
+                            </md></p></li>
+                            <li><p>
+                                This fillin has the historical <attr>characters</attr> attribute for a fillin inside math: <m>1+<fillin characters="5"/>+4=10</m>, which may be more convenient, but may not side properly in places like subscripts, superscripts, fractions, limits of integrals, and so on.
+                            </p></li>
+                        </ul></p>
+                    </statement>
+                </exercise>
+
+
+    </section>
+
+    <xi:include href="workspace-cases.ptx"/>
+  </article>
+</pretext>

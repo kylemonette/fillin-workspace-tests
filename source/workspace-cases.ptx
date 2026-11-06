@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test cases for "fillin" with @workspace.  Each case says what it  -->
+<!-- expects, so a build can be checked by reading the output.         -->
+<section xml:id="section-workspace-cases" label="section-workspace-cases" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Workspace Cases</title>
+
+  <worksheet xml:id="worksheet-tables" label="worksheet-tables">
+    <title>Tables in a Worksheet</title>
+
+    <exercise xml:id="case-paragraph-cells">
+      <title>Paragraph cells</title>
+      <statement>
+        <p>Columns with widths, and cells holding paragraphs.  Expect each blank inside its cell, which <latex/> sets as a paragraph column.</p>
+        <tabular top="minor" bottom="minor" left="minor" right="minor">
+          <col width="25%" right="minor"/>
+          <col width="35%" right="minor"/>
+          <col width="35%"/>
+          <row header="yes" bottom="minor">
+            <cell>Object</cell>
+            <cell>Definition</cell>
+            <cell>Example</cell>
+          </row>
+          <row bottom="minor">
+            <cell><p>Group</p></cell>
+            <cell><p><fillin characters="24" workspace="0.9in"/></p></cell>
+            <cell><p><fillin characters="24" workspace="0.9in"/></p></cell>
+          </row>
+          <row valign="top">
+            <cell><p>Ring</p></cell>
+            <cell><p><fillin characters="24" workspace="0.9in"/></p></cell>
+            <cell><p><fillin characters="24" workspace="0.9in"/></p></cell>
+          </row>
+        </tabular>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="case-column-span">
+      <title>A cell spanning columns</title>
+      <statement>
+        <p>The last row has one blank across two columns.  Expect it wider than the others, from <attr>characters</attr>.</p>
+        <tabular top="minor" bottom="minor" left="minor" right="minor">
+          <col right="minor"/>
+          <col right="minor"/>
+          <col/>
+          <row header="yes" bottom="minor">
+            <cell>Function</cell>
+            <cell>Derivative</cell>
+            <cell>Antiderivative</cell>
+          </row>
+          <row bottom="minor">
+            <cell><m>\sin(x)</m></cell>
+            <cell><fillin characters="16" workspace="0.6in"/></cell>
+            <cell><fillin characters="16" workspace="0.6in"/></cell>
+          </row>
+          <row>
+            <cell>Pattern</cell>
+            <cell colspan="2"><fillin characters="34" workspace="0.6in"/></cell>
+          </row>
+        </tabular>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="case-tabular-valign">
+      <title>Alignment from the table</title>
+      <statement>
+        <p>The <c>tabular</c> has <c>valign="top"</c> and no row overrides it.  Expect every label at the top of its row.  The blanks have no <attr>characters</attr>, so they are the default ten characters wide.</p>
+        <tabular valign="top" top="minor" bottom="minor">
+          <row bottom="minor">
+            <cell>First</cell>
+            <cell><fillin workspace="0.75in"/></cell>
+          </row>
+          <row>
+            <cell>Second</cell>
+            <cell><fillin workspace="0.75in"/></cell>
+          </row>
+        </tabular>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="case-table-notes">
+      <title>Table notes</title>
+      <statement>
+        <p>A table with a note, which <latex/> measures in a box.  Expect the note below the table and the blanks unaffected.</p>
+        <tabular top="minor" bottom="minor">
+          <row header="yes" bottom="minor">
+            <cell>Series<tn>Assume all terms are positive.</tn></cell>
+            <cell>Converges?</cell>
+          </row>
+          <row>
+            <cell><m>\sum 1/n^2</m></cell>
+            <cell><fillin characters="20" workspace="0.5in"/></cell>
+          </row>
+        </tabular>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="case-side-by-side">
+      <title>A table beside a figure</title>
+      <statement>
+        <p>A <c>tabular</c> inside a <c>sidebyside</c>.  Expect the blanks to fit the narrower panel.</p>
+        <sidebyside widths="45% 45%" valign="top">
+          <tabular top="minor" bottom="minor">
+            <row bottom="minor">
+              <cell>Mean</cell>
+              <cell><fillin characters="14" workspace="0.5in"/></cell>
+            </row>
+            <row>
+              <cell>Median</cell>
+              <cell><fillin characters="14" workspace="0.5in"/></cell>
+            </row>
+          </tabular>
+          <p>Data: <m>2, 3, 3, 5, 12</m>.</p>
+        </sidebyside>
+      </statement>
+    </exercise>
+  </worksheet>
+
+  <worksheet xml:id="worksheet-structures" label="worksheet-structures">
+    <title>Other Structures in a Worksheet</title>
+
+    <exercise xml:id="case-paragraph">
+      <title>In a paragraph</title>
+      <statement>
+        <p>Outside a table, expect the blank to hang down from the top of its line: <fillin characters="30" workspace="0.75in"/></p>
+        <p>The next paragraph starts below the blank.</p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="case-list">
+      <title>In a list</title>
+      <statement>
+        <p>
+          <ol>
+            <li><p>State the definition: <fillin characters="30" workspace="0.6in"/></p></li>
+            <li><p>Give an example: <fillin characters="30" workspace="0.6in"/></p></li>
+          </ol>
+        </p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="case-tasks">
+      <title>In tasks</title>
+      <introduction>
+        <p>Expect workspace in each task.</p>
+      </introduction>
+      <task>
+        <statement>
+          <tabular top="minor" bottom="minor">
+            <row>
+              <cell><m>f(x) = x^2</m></cell>
+              <cell><fillin characters="20" workspace="0.5in"/></cell>
+            </row>
+          </tabular>
+        </statement>
+      </task>
+      <task>
+        <statement>
+          <p>Explain: <fillin characters="30" workspace="0.5in"/></p>
+        </statement>
+        <hint>
+          <p>Ignored in a hint, so expect an ordinary blank: <fillin workspace="1in"/>.</p>
+        </hint>
+      </task>
+    </exercise>
+
+    <activity xml:id="case-activity">
+      <title>In a project-like</title>
+      <statement>
+        <p>An <c>activity</c> in a worksheet.  Expect workspace.</p>
+        <tabular top="minor" bottom="minor">
+          <row>
+            <cell>Prediction</cell>
+            <cell><fillin characters="24" workspace="0.6in"/></cell>
+          </row>
+        </tabular>
+      </statement>
+    </activity>
+
+    <exercise xml:id="case-units">
+      <title>Units</title>
+      <statement>
+        <p>Centimeters are accepted: <fillin characters="10" workspace="1.5cm"/></p>
+        <p>A page percentage is approximated, with a warning, as 1 inch: <fillin characters="10" workspace="10%"/></p>
+        <p>A bare number is replaced, with a warning, by 2 inches: <fillin characters="10" workspace="3"/></p>
+      </statement>
+    </exercise>
+  </worksheet>
+
+  <handout xml:id="handout-summary" label="handout-summary">
+    <title>A Handout</title>
+    <p>Not in an exercise, so expect an ordinary blank and a validation warning: <fillin characters="8" workspace="1in"/>.</p>
+    <exercise xml:id="case-handout">
+      <title>In a handout</title>
+      <statement>
+        <tabular top="minor" bottom="minor">
+          <row>
+            <cell>Summary</cell>
+            <cell><fillin characters="30" workspace="0.75in"/></cell>
+          </row>
+        </tabular>
+      </statement>
+    </exercise>
+  </handout>
+
+  <subsection xml:id="subsection-standalone-project" label="subsection-standalone-project">
+    <title>A Project Outside a Printout</title>
+    <p>A <c>project</c> with workspace is a printout of its own.  Expect it on a page of its own in <latex/>, and a print preview in <abbr>HTML</abbr>.</p>
+    <project xml:id="case-standalone-project">
+      <title>Standalone project</title>
+      <statement>
+        <tabular top="minor" bottom="minor">
+          <row>
+            <cell>Hypothesis</cell>
+            <cell><fillin characters="28" workspace="0.75in"/></cell>
+          </row>
+        </tabular>
+      </statement>
+    </project>
+  </subsection>
+</section>

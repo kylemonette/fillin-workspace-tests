@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Workspace testing: LaTeX draft mode, which shows workspace struts -->
+<publication>
+    <source>
+        <directories generated="../generated-assets"/>
+    </source>
+    <common>
+        <fillin textstyle="underline"/>
+    </common>
+    <latex draft="yes"/>
+</publication>

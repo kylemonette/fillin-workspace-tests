@@ -1,0 +1,5 @@
+/Users/Kyle/testing/logs/schema-assembled-source.xml:22:13: error: element "abstract" not allowed yet; missing required element "titlepage"
+/Users/Kyle/testing/logs/schema-assembled-source.xml:45:71: error: text not allowed here; expected element "p" or "tabular"
+/Users/Kyle/testing/logs/schema-assembled-source.xml:45:83: error: element "description" incomplete; expected element "p" or "tabular"
+/Users/Kyle/testing/logs/schema-assembled-source.xml:57:31: error: text not allowed here; expected element "p" or "tabular"
+/Users/Kyle/testing/logs/schema-assembled-source.xml:57:43: error: element "description" incomplete; expected element "p" or "tabular"

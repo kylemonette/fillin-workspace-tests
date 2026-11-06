@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<pretext xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en-US">
+
+  <docinfo>
+    <directories external="../assets"/>
+    <document-id>authorslastnamelowercase-ShortTitleCamelCase</document-id>
+
+    <macros>\newcommand{\foo}{b^{ar}}</macros>
+    <latex-image-preamble>\usepackage{tikz}</latex-image-preamble>
+  </docinfo>
+
+  <article xml:id="shorttitlelowercase">
+    <title>The title of my groundbreaking paper</title>
+
+    <frontmatter>
+  <bibinfo>
+    <author>
+      <personname>Author X. Lastname</personname>
+    </author>
+  </bibinfo>
+  
+  <abstract>
+    <p>
+      This is the abstract.
+    </p>
+  </abstract>
+</frontmatter>
+    
+    <introduction xml:id="intro">
+    <p>Some words before the first section of the paper</p>
+    <p>Some more words.</p>
+</introduction>
+    <section xml:id="section-1">
+  <title>My First Section</title>
+  <introduction>
+    <p>Some words</p>
+  </introduction>
+  <subsection xml:id="subsection-1">
+    <title>My First Subsection</title>
+    <p>Some more words</p>
+    <p>foo</p>
+    <figure>
+      <caption>A frog</caption>
+      <image source="frog.jpg" width="50%">
+        <description>A nice-looking frog with a longish description.</description>
+      </image>
+    </figure>
+    <p>Bar: <m>\foo</m></p>
+  </subsection>
+</section>
+    <section xml:id="section-2">
+  <title>My Additional Section</title>
+  <p>foo</p>
+  <figure xml:id="figure-tikz-example-diagram">
+    <caption>The graph <m>C_5</m> made by TikZ</caption>
+    <image xml:id="tikz-example-diagram" width="20%">
+      <description>A 5-cycle</description>
+      <latex-image> \begin{tikzpicture} \coordinate (A) at (90+360/5:1); \coordinate (B) at (90+2*360/5:1); \coordinate (C) at (90+3*360/5:1); \coordinate (D) at (90+4*360/5:1); \coordinate (E) at (90:1); \draw (A) -- (B) -- (C) -- (D) -- (E) -- (A); \foreach \x in {(A), (B), (C), (D), (E)}{ \fill \x circle (2pt); } \end{tikzpicture} </latex-image>
+    </image>
+  </figure>
+  <p>bar</p>
+</section>
+  </article>
+
+</pretext>

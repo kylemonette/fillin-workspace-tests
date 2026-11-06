@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Workspace testing: blanks in the "box" style -->
+<publication>
+    <source>
+        <directories generated="../generated-assets"/>
+    </source>
+    <common>
+        <fillin textstyle="box"/>
+    </common>
+</publication>

@@ -1,0 +1,887 @@
+%********************************************%
+%*       Generated from PreTeXt source      *%
+%*       on 2026-11-06T17:34:04-05:00       *%
+%*   A recent stable commit (2022-07-01):   *%
+%* 6c761d3dba23af92cba35001c852aac04ae99a5f *%
+%*                                          *%
+%*         https://pretextbook.org          *%
+%*                                          *%
+%********************************************%
+\documentclass[oneside,10pt,]{article}
+%% Custom Preamble Entries, early (use latex.preamble.early)
+%% Default LaTeX packages
+%%   1.  always employed (or nearly so) for some purpose, or
+%%   2.  a stylewriter may assume their presence
+\usepackage{geometry}
+%% Some aspects of the preamble are conditional,
+%% the LaTeX engine is one such determinant
+\usepackage{ifthen}
+%% etoolbox has a variety of modern conveniences
+\usepackage{etoolbox}
+\usepackage{ifxetex,ifluatex}
+%% Raster graphics inclusion
+\usepackage{graphicx}
+%% Color support, xcolor package
+%% Always loaded, for: add/delete text, author tools
+%% Here, since tcolorbox loads tikz, and tikz loads xcolor
+\PassOptionsToPackage{dvipsnames,svgnames,table}{xcolor}
+\usepackage{xcolor}
+%% begin: defined colors, via xcolor package, for styling
+%% end: defined colors, via xcolor package, for styling
+%% Colored boxes, and much more, though mostly styling
+%% skins library provides "enhanced" skin, employing tikzpicture
+%% boxes may be configured as "breakable" or "unbreakable"
+%% "raster" controls grids of boxes, aka side-by-side
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\tcbuselibrary{breakable}
+\tcbuselibrary{raster}
+%% We load some "stock" tcolorbox styles that we use a lot
+%% Placement here is provisional, there will be some color work also
+%% First, black on white, no border, transparent, but no assumption about titles
+\tcbset{ bwminimalstyle/.style={size=minimal, boxrule=-0.3pt, frame empty,
+colback=white, colbacktitle=white, coltitle=black, opacityfill=0.0} }
+%% Second, bold title, run-in to text/paragraph/heading
+%% Space afterwards will be controlled by environment,
+%% independent of constructions of the tcb title
+%% Places \blocktitlefont onto many block titles
+\tcbset{ runintitlestyle/.style={fonttitle=\blocktitlefont\upshape\bfseries, attach title to upper} }
+%% Spacing prior to each exercise, anywhere
+\tcbset{ exercisespacingstyle/.style={before skip={1.5ex plus 0.5ex}} }
+%% Spacing prior to each block
+\tcbset{ blockspacingstyle/.style={before skip={2.0ex plus 0.5ex}} }
+%% xparse allows the construction of more robust commands,
+%% this is a necessity for isolating styling and behavior
+%% The tcolorbox library of the same name loads the base library
+\tcbuselibrary{xparse}
+%% The tcolorbox library loads TikZ, its calc package is generally useful,
+%% and is necessary for some smaller documents that use partial tcolor boxes
+%% See:  https://github.com/PreTeXtBook/pretext/issues/1624
+\usetikzlibrary{calc}
+%% We use some more exotic tcolorbox keys to restore indentation to parboxes
+\tcbuselibrary{hooks}
+%% Save default paragraph indentation and parskip for use later, when adjusting parboxes
+\newlength{\ptxnormalparindent}
+\newlength{\ptxnormalparskip}
+%% Prescribe the paragraph indent to the value shared with the
+%% XSL-FO conversion, so the two agree, rather than accepting the
+%% document class default; "\ptxnormalparindent" then captures it
+\AtBeginDocument{\setlength{\parindent}{1.5em}}
+\AtBeginDocument{\setlength{\ptxnormalparindent}{\parindent}}
+\AtBeginDocument{\setlength{\ptxnormalparskip}{\parskip}}
+\newcommand{\ptxsetparstyle}{\setlength{\parindent}{\ptxnormalparindent}\setlength{\parskip}{\ptxnormalparskip}}%% An appendix is numbered by a letter, and a bare letter beside a
+%% title is ambiguous ("A Trip Abroad"), so a letter composed with
+%% a title carries a period ("A. Trip Abroad").  These macros are
+%% seams in the division styles, empty until the appendices arrive
+%% (chapter-level for a book, section-level for an article, so a
+%% multi-part number like "E.1" never gains a period); see the
+%% uses at  \appendix
+\newcommand{\ptxappendixperiodchapter}{}
+\newcommand{\ptxappendixperiodsection}{}
+%% Hyperref should be here, but likes to be loaded late
+%%
+%% Inline math delimiters, \(, \), need to be robust
+%% 2016-01-31:  latexrelease.sty  supersedes  fixltx2e.sty
+%% If  latexrelease.sty  exists, bugfix is in kernel
+%% If not, bugfix is in  fixltx2e.sty
+%% See:  https://tug.org/TUGboat/tb36-3/tb114ltnews22.pdf
+%% and read "Fewer fragile commands" in distribution's  latexchanges.pdf
+\IfFileExists{latexrelease.sty}{}{\usepackage{fixltx2e}}
+%% shorter subnumbers in some side-by-side require manipulations
+\usepackage{xstring}
+%% Text height identically 9 inches, text width varies on point size
+%% See Bringhurst 2.1.1 on measure for recommendations
+%% 75 characters per line (count spaces, punctuation) is target
+%% which is the upper limit of Bringhurst's recommendations
+\geometry{letterpaper,total={340pt,9.0in}}
+%% Custom Page Layout Adjustments (use publisher page-geometry entry)
+%% This LaTeX file may be compiled with pdflatex, xelatex, or lualatex executables
+%% LuaTeX is not explicitly supported, but we do accept additions from knowledgeable users
+%% The conditional below provides  pdflatex  specific configuration last
+%% begin: engine-specific capabilities
+\ifthenelse{\boolean{xetex} \or \boolean{luatex}}{%
+%% begin: xelatex and lualatex-specific default configuration
+\ifxetex\usepackage{xltxtra}\fi
+%% realscripts is the only part of xltxtra relevant to lualatex 
+\ifluatex\usepackage{realscripts}\fi
+%% end:   xelatex and lualatex-specific default configuration
+}{
+%% begin: pdflatex-specific default configuration
+%% We assume a PreTeXt XML source file may have Unicode characters
+%% and so we ask LaTeX to parse a UTF-8 encoded file
+%% This may work well for accented characters in Western language,
+%% but not with Greek, Asian languages, etc.
+%% When this is not good enough, switch to the  xelatex  engine
+%% where Unicode is better supported (encouraged, even)
+\usepackage[utf8]{inputenc}
+%% end: pdflatex-specific default configuration
+}
+%% end:   engine-specific capabilities
+%%
+%% Fonts.  Conditional on LaTex engine employed.
+%% Default Text Font: The Latin Modern fonts are
+%% "enhanced versions of the [original TeX] Computer Modern fonts."
+%% We use them as the default text font for PreTeXt output.
+%% Default Monospace font: Inconsolata (aka zi4)
+%% Sponsored by TUG: http://levien.com/type/myfonts/inconsolata.html
+%% Loaded for documents with intentional objects requiring monospace
+%% See package documentation for excellent instructions
+%% fontspec will work universally if we use filename to locate OTF files
+%% Loads the "upquote" package as needed, so we don't have to
+%% Upright quotes might come from the  textcomp  package, which we also use
+%% We employ the shapely \ell to match Google Font version
+%% pdflatex: "varl" package option produces shapely \ell
+%% pdflatex: "var0" package option produces plain zero (not used)
+%% pdflatex: "varqu" package option produces best upright quotes
+%% xelatex,lualatex: add OTF StylisticSet 1 for shapely \ell
+%% xelatex,lualatex: add OTF StylisticSet 2 for plain zero (not used)
+%% xelatex,lualatex: add OTF StylisticSet 3 for upright quotes
+%%
+%% Automatic Font Control
+%% Portions of a document, are, or may, be affected by defined commands
+%% These are perhaps more flexible when using  xelatex  rather than  pdflatex
+%% The following definitions are meant to be re-defined in a style, using \renewcommand
+%% They are scoped when employed (in a TeX group), and so should not be defined with an argument
+\newcommand{\divisionfont}{\relax}
+\newcommand{\blocktitlefont}{\relax}
+\newcommand{\contentsfont}{\relax}
+\newcommand{\pagefont}{\relax}
+\newcommand{\tabularfont}{\relax}
+\newcommand{\xreffont}{\relax}
+\newcommand{\titlepagefont}{\relax}
+%%
+\ifthenelse{\boolean{xetex} \or \boolean{luatex}}{%
+%% begin: font setup and configuration for use with xelatex
+%% Generally, xelatex is necessary for non-Western fonts
+%% fontspec package provides extensive control of system fonts,
+%% meaning *.otf (OpenType), and apparently *.ttf (TrueType)
+%% that live *outside* your TeX/MF tree, and are controlled by your *system*
+%% (it is possible that a TeX distribution will place fonts in a system location)
+%%
+%% The fontspec package is the best vehicle for using different fonts in  xelatex
+%% So we load it always, no matter what a publisher or style might want
+%%
+\usepackage{fontspec}
+%%
+%% begin: xelatex main font ("font-xelatex-main" template)
+%% Latin Modern Roman is the default font for xelatex and so is loaded with a TU encoding
+%% *in the format* so we can't touch it, only perhaps adjust it later
+%% in one of two ways (then known by NFSS names such as "lmr")
+%% (1) via NFSS with font family names such as "lmr" and "lmss"
+%% (2) via fontspec with commands like \setmainfont{Latin Modern Roman}
+%% The latter requires the font to be known at the system-level by its font name,
+%% but will give access to OTF font features through optional arguments
+%% https://tex.stackexchange.com/questions/470008/
+%% where-and-how-does-fontspec-sty-specify-the-default-font-latin-modern-roman
+%% http://tex.stackexchange.com/questions/115321
+%% /how-to-optimize-latin-modern-font-with-xelatex
+%%
+%% end:   xelatex main font ("font-xelatex-main" template)
+%% begin: xelatex math font ("font-xelatex-math" template)
+%% end:   xelatex math font ("font-xelatex-math" template)
+%% begin: xelatex mono font ("font-xelatex-mono" template)
+%% (conditional on non-trivial uses being present in source)
+\IfFontExistsTF{Inconsolatazi4-Regular.otf}{}{\GenericError{}{The font "Inconsolatazi4-Regular.otf" requested by PreTeXt output processed by the  xelatex  executable is not available.  Either a file cannot be located in default locations via a filename, or a font is not known by its name as part of your system.}{Perhaps try using  pdflatex  as a test.}{}}
+\IfFontExistsTF{Inconsolatazi4-Bold.otf}{}{\GenericError{}{The font "Inconsolatazi4-Bold.otf" requested by PreTeXt output processed by the  xelatex  executable is not available.  Either a file cannot be located in default locations via a filename, or a font is not known by its name as part of your system.}{Perhaps try using  pdflatex  as a test.}{}}
+\usepackage{zi4}
+\setmonofont[BoldFont=Inconsolatazi4-Bold.otf,StylisticSet={1,3}]{Inconsolatazi4-Regular.otf}
+%% end:   xelatex mono font ("font-xelatex-mono" template)
+%% begin: xelatex font adjustments ("font-xelatex-style" template)
+%% end:   xelatex font adjustments ("font-xelatex-style" template)
+%%
+%% Extensive support for other languages
+\usepackage{polyglossia}
+%% Set main/default language based on pretext/@xml:lang value
+%% document language code is "en-US", US English
+%% usmax variant has extra hypenation
+\setmainlanguage[variant=usmax]{english}
+%% Enable secondary languages based on discovery of @xml:lang values
+%% Enable fonts/scripts based on discovery of @xml:lang values
+%% Western languages should be ably covered by Latin Modern Roman
+%% end:   font setup and configuration for use with xelatex
+}{%
+%% begin: font setup and configuration for use with pdflatex
+%% begin: pdflatex main font ("font-pdflatex-main" template)
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+%% end:   pdflatex main font ("font-pdflatex-main" template)
+%% begin: pdflatex mono font ("font-pdflatex-mono" template)
+%% (conditional on non-trivial uses being present in source)
+\usepackage[varqu,varl]{inconsolata}
+%% end:   pdflatex mono font ("font-pdflatex-mono" template)
+%% begin: pdflatex font adjustments ("font-pdflatex-style" template)
+%% end:   pdflatex font adjustments ("font-pdflatex-style" template)
+%% end:   font setup and configuration for use with pdflatex
+}
+%% Micromanage spacing, etc.  The named "microtype-options"
+%% template may be employed to fine-tune package behavior
+\usepackage{microtype}
+%% Symbols, align environment, commutative diagrams, bracket-matrix
+\usepackage{amsmath}
+\usepackage{amscd}
+\usepackage{amssymb}
+%% allow page breaks within display mathematics anywhere
+%% level 4 is maximally permissive
+%% this is exactly the opposite of AMSmath package philosophy
+%% there are per-display, and per-equation options to control this
+%% split, aligned, gathered, and alignedat are not affected
+\allowdisplaybreaks[4]
+%% allow more columns to a matrix
+%% can make this even bigger by overriding with  latex.preamble.late  processing option
+\setcounter{MaxMatrixCols}{30}
+%%
+%% Symbols for use in text mode (i.e. not in math mode)
+\usepackage{pifont}
+%% Solid geometric shapes to mark ends of environments
+\newcommand{\ptxsquare}{\ding{110}}
+\newcommand{\ptxtriangle}{\ding{115}}
+\newcommand{\ptxdiamond}{\ding{117}}
+%% Markers for unordered list items
+\newcommand{\ptxlistdisc}{\raisebox{0.3ex}{\textbullet}}
+\newcommand{\ptxlistcircle}{\raisebox{0.3ex}{\textopenbullet}}
+\newcommand{\ptxlistsquare}{\raisebox{0.4ex}{\scalebox{0.5}{\ding{110}}}}
+%%
+%% Division Titles, and Page Headers/Footers
+%% titlesec package, loading "titleps" package cooperatively
+%% See code comments about the necessity and purpose of "explicit" option.
+%% The "newparttoc" option causes a consistent entry for parts in the ToC 
+%% file, but it is only effective if there is a \titleformat for \part.
+%% "pagestyles" loads the  titleps  package cooperatively.
+\usepackage[explicit, newparttoc, pagestyles]{titlesec}
+%% The companion titletoc package for the ToC.
+\usepackage{titletoc}
+%% begin: customizations of page styles via the modal "titleps-style" template
+%% Designed to use commands from the LaTeX "titleps" package
+\pagestyle{plain}
+%% end: customizations of page styles via the modal "titleps-style" template
+%%
+%% Create globally-available macros to be provided for style writers
+%% These are redefined for each occurence of each division
+\newcommand{\divisionnameptx}{\relax}%
+\newcommand{\titleptx}{\relax}%
+\newcommand{\subtitleptx}{\relax}%
+\newcommand{\shortitleptx}{\relax}%
+\newcommand{\authorsptx}{\relax}%
+\newcommand{\epigraphptx}{\relax}%
+%% Create environments for possible occurences of each division
+%% Environment for a PTX "worksheet" at the level of a LaTeX "section"
+\NewDocumentEnvironment{worksheet-section}{mmmmmmm}
+{%
+\renewcommand{\divisionnameptx}{#1}%
+\renewcommand{\titleptx}{#2}%
+\renewcommand{\subtitleptx}{#3}%
+\renewcommand{\shortitleptx}{#4}%
+\renewcommand{\authorsptx}{#5}%
+\renewcommand{\epigraphptx}{#6}%
+\section[{#4}]{#2}%
+\label{#7}%
+}{}%
+%% Environment for a PTX "worksheet" at the level of a LaTeX "section"
+\NewDocumentEnvironment{worksheet-section-numberless}{mmmmmmm}
+{%
+\renewcommand{\divisionnameptx}{#1}%
+\renewcommand{\titleptx}{#2}%
+\renewcommand{\subtitleptx}{#3}%
+\renewcommand{\shortitleptx}{#4}%
+\renewcommand{\authorsptx}{#5}%
+\renewcommand{\epigraphptx}{#6}%
+\section*{#2}%
+\addcontentsline{toc}{section}{#4}
+\label{#7}%
+}{}%
+%% Environment for a PTX "section" at the level of a LaTeX "section"
+\NewDocumentEnvironment{sectionptx}{mmmmmmm}
+{%
+\renewcommand{\divisionnameptx}{#1}%
+\renewcommand{\titleptx}{#2}%
+\renewcommand{\subtitleptx}{#3}%
+\renewcommand{\shortitleptx}{#4}%
+\renewcommand{\authorsptx}{#5}%
+\renewcommand{\epigraphptx}{#6}%
+\section[{#4}]{#2}%
+\label{#7}%
+}{}%
+%% Environment for a PTX "worksheet" at the level of a LaTeX "subsection"
+\NewDocumentEnvironment{worksheet-subsection}{mmmmmmm}
+{%
+\renewcommand{\divisionnameptx}{#1}%
+\renewcommand{\titleptx}{#2}%
+\renewcommand{\subtitleptx}{#3}%
+\renewcommand{\shortitleptx}{#4}%
+\renewcommand{\authorsptx}{#5}%
+\renewcommand{\epigraphptx}{#6}%
+\subsection[{#4}]{#2}%
+\label{#7}%
+}{}%
+%% Environment for a PTX "worksheet" at the level of a LaTeX "subsection"
+\NewDocumentEnvironment{worksheet-subsection-numberless}{mmmmmmm}
+{%
+\renewcommand{\divisionnameptx}{#1}%
+\renewcommand{\titleptx}{#2}%
+\renewcommand{\subtitleptx}{#3}%
+\renewcommand{\shortitleptx}{#4}%
+\renewcommand{\authorsptx}{#5}%
+\renewcommand{\epigraphptx}{#6}%
+\subsection*{#2}%
+\addcontentsline{toc}{subsection}{#4}
+\label{#7}%
+}{}%
+%% Environment for a PTX "handout" at the level of a LaTeX "subsection"
+\NewDocumentEnvironment{handout-subsection}{mmmmmmm}
+{%
+\renewcommand{\divisionnameptx}{#1}%
+\renewcommand{\titleptx}{#2}%
+\renewcommand{\subtitleptx}{#3}%
+\renewcommand{\shortitleptx}{#4}%
+\renewcommand{\authorsptx}{#5}%
+\renewcommand{\epigraphptx}{#6}%
+\subsection[{#4}]{#2}%
+\label{#7}%
+}{}%
+%% Environment for a PTX "handout" at the level of a LaTeX "subsection"
+\NewDocumentEnvironment{handout-subsection-numberless}{mmmmmmm}
+{%
+\renewcommand{\divisionnameptx}{#1}%
+\renewcommand{\titleptx}{#2}%
+\renewcommand{\subtitleptx}{#3}%
+\renewcommand{\shortitleptx}{#4}%
+\renewcommand{\authorsptx}{#5}%
+\renewcommand{\epigraphptx}{#6}%
+\subsection*{#2}%
+\addcontentsline{toc}{subsection}{#4}
+\label{#7}%
+}{}%
+%% Environment for a PTX "subsection" at the level of a LaTeX "subsection"
+\NewDocumentEnvironment{subsectionptx}{mmmmmmm}
+{%
+\renewcommand{\divisionnameptx}{#1}%
+\renewcommand{\titleptx}{#2}%
+\renewcommand{\subtitleptx}{#3}%
+\renewcommand{\shortitleptx}{#4}%
+\renewcommand{\authorsptx}{#5}%
+\renewcommand{\epigraphptx}{#6}%
+\subsection[{#4}]{#2}%
+\label{#7}%
+}{}%
+%%
+%% Styles for six traditional LaTeX divisions
+\titleformat{\part}[display]
+{\divisionfont\Huge\bfseries\centering}{\divisionnameptx\space\thepart}{30pt}{\Huge#1}
+[{\Large\centering\authorsptx}]
+\titleformat{\chapter}[display]
+{\divisionfont\huge\bfseries}{\divisionnameptx\space\thechapter}{20pt}{\Huge#1}
+[{\Large\authorsptx}]
+\titleformat{name=\chapter,numberless}[display]
+{\divisionfont\huge\bfseries}{}{0pt}{#1}
+[{\Large\authorsptx}]
+\titlespacing*{\chapter}{0pt}{50pt}{40pt}
+\titleformat{\section}[hang]
+{\divisionfont\Large\bfseries}{\thesection\ptxappendixperiodsection}{1ex}{#1}
+[{\large\authorsptx}]
+\titleformat{name=\section,numberless}[block]
+{\divisionfont\Large\bfseries}{}{0pt}{#1}
+[{\large\authorsptx}]
+\titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+\titleformat{\subsection}[hang]
+{\divisionfont\large\bfseries}{\thesubsection}{1ex}{#1}
+[{\normalsize\authorsptx}]
+\titleformat{name=\subsection,numberless}[block]
+{\divisionfont\large\bfseries}{}{0pt}{#1}
+[{\normalsize\authorsptx}]
+\titlespacing*{\subsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\titleformat{\subsubsection}[hang]
+{\divisionfont\normalsize\bfseries}{\thesubsubsection}{1em}{#1}
+[{\small\authorsptx}]
+\titleformat{name=\subsubsection,numberless}[block]
+{\divisionfont\normalsize\bfseries}{}{0pt}{#1}
+[{\normalsize\authorsptx}]
+\titlespacing*{\subsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\titleformat{\paragraph}[hang]
+{\divisionfont\normalsize\bfseries}{\theparagraph}{1em}{#1}
+[{\small\authorsptx}]
+\titleformat{name=\paragraph,numberless}[block]
+{\divisionfont\normalsize\bfseries}{}{0pt}{#1}
+[{\normalsize\authorsptx}]
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5em}
+%%
+%% Styles for five traditional LaTeX divisions
+\titlecontents{part}%
+[0pt]{\contentsmargin{0em}\addvspace{1pc}\contentsfont\bfseries}%
+{\Large\thecontentslabel\enspace}{\Large}%
+{}%
+[\addvspace{.5pc}]%
+\titlecontents{chapter}%
+[0pt]{\contentsmargin{0em}\addvspace{1pc}\contentsfont\bfseries}%
+{\large\thecontentslabel\ptxappendixperiodchapter\enspace}{\large}%
+{\hfill\bfseries\thecontentspage}%
+[\addvspace{.5pc}]%
+\titlecontents{section}%
+[3.8em]{\contentsfont}%
+{\contentslabel[\thecontentslabel\ptxappendixperiodsection]{2.3em}}%
+{\hspace*{-2.3em}}%
+{\titlerule*[1pc]{.}\contentspage}%
+\dottedcontents{subsection}[6.1em]{\contentsfont}{3.2em}{1pc}%
+\dottedcontents{subsubsection}[9.3em]{\contentsfont}{4.3em}{1pc}%
+%%
+%% Begin: Semantic Macros
+%% To preserve meaning in a LaTeX file
+%%
+%% \ptxmono macro for content of "c", "cd", "tag", etc elements
+%% Also used automatically in other constructions
+%% Simply an alias for \texttt
+%% Always defined, even if there is no need, or if a specific tt font is not loaded
+\newcommand{\ptxmono}[1]{\texttt{#1}}
+%%
+%%
+%% Following semantic macros are only defined here if their
+%% use is required only in this specific document
+%%
+\newcommand{\ptxabbreviation}[1]{%% Used to markup abbreviations, text or titles
+\textsc{\MakeLowercase{#1}}}
+\DeclareRobustCommand{\abbreviationintitle}[1]{\texorpdfstring{#1}{#1}}
+%% Used for fillin answer blank in text
+%% Relies on calc package, loaded via tcolorbox
+%% Argument is intended number of characters of blank
+%% Length may compress for output to fit in one line
+\newlength{\ptxfillinmaxwidth}
+\newlength{\ptxfillincontract}
+\newlength{\ptxcharmaxwidth}\setlength{\ptxcharmaxwidth}{0.5em}
+\newlength{\ptxcharminwidth}\setlength{\ptxcharminwidth}{0.1em}
+\newlength{\ptxfillinheight}
+\newcommand{\ptxfillintext}[1]{%
+\setlength{\ptxfillinmaxwidth}{#1\ptxcharmaxwidth}%
+\setlength{\ptxfillincontract}{#1\ptxcharminwidth}%
+\setlength{\ptxfillinheight}{\baselineskip}\addtolength{\ptxfillinheight}{1.2pt}%
+\strut\nobreak\leaders\vbox{\hrule width 0.3pt height 0.3pt \vskip -1.2pt}\hskip 1\ptxfillinmaxwidth minus \ptxfillincontract\nobreak\strut%
+}
+%% Fillin blank as workspace, space for writing in a printout
+%% #1: placement against its line, t(op), c(enter), b(ottom)
+%% #2: intended number of characters of width, #3: height
+%% A strut keeps a separation above and below, off any rule of a table
+\newlength{\ptxfillinworkspacewidth}
+\newlength{\ptxfillinworkspaceraise}
+\newlength{\ptxfillinworkspacesep}\setlength{\ptxfillinworkspacesep}{4pt}
+%% Ruled lines, spaced for handwriting
+\newlength{\ptxfillinworkspaceruleskip}\setlength{\ptxfillinworkspaceruleskip}{0.3in}
+\newcommand{\ptxfillinworkspace}[3]{%
+\setlength{\ptxfillinworkspacewidth}{#2\ptxcharmaxwidth}%
+\if t#1\setlength{\ptxfillinworkspaceraise}{\dimexpr\ht\strutbox-#3\relax}%
+\else\if b#1\setlength{\ptxfillinworkspaceraise}{\dimexpr-\dp\strutbox\relax}%
+\else\setlength{\ptxfillinworkspaceraise}{\dimexpr(\ht\strutbox-\dp\strutbox-#3)/2\relax}\fi\fi%
+\raisebox{\ptxfillinworkspaceraise}{\rule[-\ptxfillinworkspacesep]{0pt}{\dimexpr#3+2\ptxfillinworkspacesep\relax}\vbox to #3{\hrule width \ptxfillinworkspacewidth height 0pt\leaders\vbox to \ptxfillinworkspaceruleskip{\vfil\hrule width \ptxfillinworkspacewidth height 0.3pt}\vskip\dimexpr#3+0.5pt\relax\vskip-0.5pt}}%
+}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+%% End: Semantic Macros
+%% Divisional exercises (and worksheet) as LaTeX environments
+%% Third argument is option for extra workspace in worksheets
+%% Hanging indent occupies a 5ex width slot prior to left margin
+%% Experimentally this seems just barely sufficient for a bold "888."
+%% Division exercises, not in exercise group
+\tcbset{ divisionexercisestyle/.style={bwminimalstyle, runintitlestyle, exercisespacingstyle, left=5ex, breakable, before upper app={\ptxsetparstyle} } }
+\newtcolorbox{divisionexercise}[4]{divisionexercisestyle, before title={\hspace*{-5ex}\makebox[5ex][l]{#1.}}, title={\notblank{#2}{#2}{}}, after title={\notblank{#2}{\space}{}}, phantom={\hypertarget{#4}{}}, after={\notblank{#3}{\par\rule{\ptxworkspacestrutwidth}{#3}\par\vfill}{\par}}}
+%% Worksheets and handouts children may have workspaces
+\newlength{\ptxworkspacestrutwidth}
+%% @workspace strut is invisible
+\setlength{\ptxworkspacestrutwidth}{0pt}
+%% Equation Numbering
+%% Controlled by  numbering.equations.level  processing parameter
+%% No adjustment here implies document-wide numbering
+\numberwithin{equation}{section}
+%% A box to measure a "tabular", so its table notes set to its width
+\newsavebox{\ptxtablenotebox}
+%% For improved tables
+\usepackage{array}
+%% Some extra height on each row is desirable, especially with horizontal rules
+%% Increment determined experimentally
+\setlength{\extrarowheight}{0.2ex}
+%% Define variable thickness horizontal rules, full and partial
+%% Thicknesses are 0.03, 0.05, 0.08 in the  booktabs  package
+\newcommand{\ptxhrulethin}  {\noalign{\hrule height 0.04em}}
+\newcommand{\ptxhrulemedium}{\noalign{\hrule height 0.07em}}
+\newcommand{\ptxhrulethick} {\noalign{\hrule height 0.11em}}
+%% We preserve a copy of the \setlength package before other
+%% packages (extpfeil) get a chance to load packages that redefine it
+\let\ptxoldsetlength\setlength
+\newlength{\ptxOldarrayrulewidth}
+\newcommand{\ptxcrulethin}[1]%
+{\noalign{\global\ptxoldsetlength{\ptxOldarrayrulewidth}{\arrayrulewidth}}%
+\noalign{\global\ptxoldsetlength{\arrayrulewidth}{0.04em}}\cline{#1}%
+\noalign{\global\ptxoldsetlength{\arrayrulewidth}{\ptxOldarrayrulewidth}}}%
+\newcommand{\ptxcrulemedium}[1]%
+{\noalign{\global\ptxoldsetlength{\ptxOldarrayrulewidth}{\arrayrulewidth}}%
+\noalign{\global\ptxoldsetlength{\arrayrulewidth}{0.07em}}\cline{#1}%
+\noalign{\global\ptxoldsetlength{\arrayrulewidth}{\ptxOldarrayrulewidth}}}
+\newcommand{\ptxcrulethick}[1]%
+{\noalign{\global\ptxoldsetlength{\ptxOldarrayrulewidth}{\arrayrulewidth}}%
+\noalign{\global\ptxoldsetlength{\arrayrulewidth}{0.11em}}\cline{#1}%
+\noalign{\global\ptxoldsetlength{\arrayrulewidth}{\ptxOldarrayrulewidth}}}
+%% Single letter column specifiers defined via array package
+\newcolumntype{A}{!{\vrule width 0.04em}}
+\newcolumntype{B}{!{\vrule width 0.07em}}
+\newcolumntype{C}{!{\vrule width 0.11em}}
+%% tcolorbox to place tabular outside of a sidebyside
+\tcbset{ tabularboxstyle/.style={bwminimalstyle,} }
+\newtcolorbox{tabularbox}[3]{tabularboxstyle, left skip=#1\linewidth, width=#2\linewidth,}
+%% More flexible list management, esp. for references
+%% But also for specifying labels (i.e. custom order) on nested lists
+\usepackage{enumitem}
+%% hyperref driver does not need to be specified, it will be detected
+\usepackage{hyperref}
+%% Hyperlinking active in electronic PDFs, all links without surrounding boxes and blue
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,filecolor=blue,urlcolor=blue}
+%% Less-clever names for hyperlinks are more reliable, *especially* for structural parts
+%% See comments in the code to learn more about the importance of this setting
+\hypersetup{hypertexnames=false}
+%%The  hypertexnames  setting then confuses the hyperlinking from the index
+%%This patch resolves the incorrect links, see code for StackExchange post.
+\makeatletter
+\patchcmd\Hy@EveryPageBoxHook{\Hy@EveryPageAnchor}{\Hy@hypertexnamestrue\Hy@EveryPageAnchor}{}{\fail}
+\makeatother
+\hypersetup{pdftitle={Fillin Workspace Test}}
+%% If you manually remove hyperref, leave in this next command
+%% This will allow LaTeX compilation, employing this no-op command
+\providecommand\phantomsection{}
+%% Division Numbering: Chapters, Sections, Subsections, etc
+%% Division numbers may be turned off at some level ("depth")
+%% A section *always* has depth 1, contrary to us counting from the document root
+%% The latex default is 3.  If a larger number is present here, then
+%% removing this command may make some cross-references ambiguous
+%% The precursor variable $numbering-maxlevel is checked for consistency in the common XSL file
+\setcounter{secnumdepth}{3}
+%%
+%%
+%% A faux tcolorbox whose only purpose is to provide common numbering
+%% facilities for most blocks (possibly not projects, 2D displays)
+%% Controlled by  numbering.theorems.level  processing parameter
+\newtcolorbox[auto counter, number within=section]{block}{}
+%% A faux tcolorbox whose only purpose is to provide common numbering
+%% facilities for 2D displays which are subnumbered as part of a "sidebyside"
+\makeatletter
+\newtcolorbox[auto counter, number within=tcb@cnt@block, number freestyle={\noexpand\thetcb@cnt@block(\noexpand\alph{\tcbcounter})}]{subdisplay}{}
+\makeatother
+%%
+%% tcolorbox, with styles, for inline exercises
+%%
+%% inlineexercise: fairly simple numbered block/structure
+\tcbset{ inlineexercisestyle/.style={bwminimalstyle, runintitlestyle, blockspacingstyle, after title={\space}, before upper app={\ptxsetparstyle}, } }
+\newtcolorbox[use counter from=block]{inlineexercise}[3]{title={{#1~\thetcbcounter\notblank{#2}{\space\space#2}{}}}, phantomlabel={#3}, breakable, after={\par}, inlineexercisestyle, }
+%%
+%% tcolorbox, with styles, for PROJECT-LIKE
+%%
+%% activity: fairly simple numbered block/structure
+\tcbset{ activitystyle/.style={bwminimalstyle, runintitlestyle, blockspacingstyle, after title={\space}, before upper app={\ptxsetparstyle}, } }
+\newtcolorbox[use counter from=block]{activity}[3]{title={{#1~\thetcbcounter\notblank{#2}{\space\space#2}{}}}, phantomlabel={#3}, breakable, after={\par}, activitystyle, }
+%% project: fairly simple numbered block/structure
+\tcbset{ projectstyle/.style={bwminimalstyle, runintitlestyle, blockspacingstyle, after title={\space}, before upper app={\ptxsetparstyle}, } }
+\newtcolorbox[use counter from=block]{project}[3]{title={{#1~\thetcbcounter\notblank{#2}{\space\space#2}{}}}, phantomlabel={#3}, breakable, after={\par}, projectstyle, }
+%%
+%% xparse environments for introductions and conclusions of divisions
+%%
+%% introduction: in a structured division
+\NewDocumentEnvironment{introduction}{m}
+{\notblank{#1}{\noindent\textbf{#1}\space}{}}{\par\medskip}
+%% Graphics Preamble Entries
+%% If tikz has been loaded, replace ampersand with \amp macro
+%% tcolorbox styles for sidebyside layout
+\tcbset{ sbsstyle/.style={raster before skip=2.0ex, raster equal height=rows, raster force size=false, raster after skip=0.7\baselineskip} }
+\tcbset{ sbspanelstyle/.style={bwminimalstyle, fonttitle=\blocktitlefont, before upper app={\ptxsetparstyle}} }
+%% Enviroments for side-by-side and components
+%% Necessary to use \NewTColorBox for boxes of the panels
+%% "newfloat" environment to squash page-breaks within a single sidebyside
+%% "xparse" environment for entire sidebyside
+\NewDocumentEnvironment{sidebyside}{mmmm}
+  {\begin{tcbraster}
+    [sbsstyle,raster columns=#1,
+    raster left skip=#2\linewidth,raster right skip=#3\linewidth,raster column skip=#4\linewidth]}
+  {\end{tcbraster}}
+%% "tcolorbox" environment for a panel of sidebyside
+\NewTColorBox{sbspanel}{mO{top}}{sbspanelstyle,width=#1\linewidth,valign=#2}
+%% Custom Preamble Entries, late (use latex.preamble.late)
+%% Begin: Author-provided macros
+%% (From  docinfo/macros  element)
+%% Plus three from PTX for XML characters
+
+\newcommand{\lt}{<}
+\newcommand{\gt}{>}
+\newcommand{\amp}{&}
+%% End: Author-provided macros
+%% Title page information for article
+\title{Fillin Workspace Test}
+\date{}
+\begin{document}
+%% bottom alignment is explicit, since it normally depends on oneside, twoside
+\raggedbottom
+%% Target for xref to top-level element is document start
+\hypertarget{fillin-workspace-test}{}
+\maketitle
+\thispagestyle{empty}
+%
+%
+\typeout{************************************************}
+\typeout{Worksheet 1 Convergence Tests}
+\typeout{************************************************}
+%
+\newgeometry{left=0.75in, right=0.75in, top=0.75in, bottom=0.75in}
+\begin{worksheet-section}{Worksheet}{Convergence Tests}{}{Convergence Tests}{}{}{worksheet-convergence}
+\begin{introduction}{}%
+Ignored here, not in an exercise: \ptxfillintext{8}.%
+\end{introduction}%
+\begin{divisionexercise}{1}{}{}{worksheet-convergence-3}%
+Complete the table.%
+\begin{center}%
+{\tabularfont%
+\begin{tabular}{AlAlAlA}\ptxhrulethick
+{\bfseries{}Test}&{\bfseries{}Hypotheses}&{\bfseries{}Conclusion}\tabularnewline\ptxhrulethin
+Ratio test&\ptxfillinworkspace{c}{30}{1in}&\ptxfillinworkspace{c}{24}{1in}\tabularnewline\ptxhrulethin
+Root test&\ptxfillinworkspace{t}{30}{1.5in}&\ptxfillinworkspace{t}{24}{1.5in}\tabularnewline\ptxhrulethin
+Integral test&\ptxfillinworkspace{b}{30}{2cm}&\ptxfillinworkspace{b}{24}{2cm}\tabularnewline\ptxhrulethin
+\end{tabular}
+}%
+\end{center}%
+An ordinary blank still works: \ptxfillintext{6}.%
+\par
+Testing mathematics:%
+\par
+\(x = \fillinmath{XXX}\)%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Solution}.\hypertarget{worksheet-convergence-3-2}{}\quad{}Ignored in a solution: \ptxfillintext{10}.%
+\end{divisionexercise}%
+\end{worksheet-section}
+\restoregeometry
+%
+%
+\typeout{************************************************}
+\typeout{Section 2 Not a Printout}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Section}{Not a Printout}{}{Not a Printout}{}{}{section-not-printout}
+\begin{inlineexercise}{Checkpoint}{}{section-not-printout-2}%
+Ignored outside a printout: \ptxfillintext{8}.%
+\end{inlineexercise}%
+\begin{inlineexercise}{Checkpoint}{}{section-not-printout-3}%
+%
+\begin{itemize}[label=\ptxlistdisc]
+\item{}Inside inline math (short, space for \(x\)): \(\sin(\fillinmath{x})\)%
+\item{}Inside inline math (default, space for \(XXX\)): \(\sin(\fillinmath{XXX})\)%
+\item{}Inside exponents and subscripts (each is space for the string \textquotedblleft{}12\textquotedblright{}).  In this case, be sure to wrap your exponents and subscripts in braces, as would be good \LaTeX{} practice anyway: \(x^{5+\fillinmath{12}}\,y_{\fillinmath{12}}\)%
+\item{}Inside inline math (too long for this line probably, 40 characters long): \(\tan(\fillinmath{Mxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx})\)%
+\item{}So use inside a displayed equation%
+\begin{equation*}
+16\log\space\fillinmath{1-x^2}
+\end{equation*}
+like this one.%
+\item{}Inside the second line of a multi-line display:%
+\begin{align*}
+y &= x^7\,x^8\\
+&= x^{\fillinmath{15}}
+\end{align*}
+%
+\item{}This fillin has the historical \ptxmono{@characters} attribute for a fillin inside math: \(1+\fillinmath{XXXXX}+4=10\), which may be more convenient, but may not side properly in places like subscripts, superscripts, fractions, limits of integrals, and so on.%
+\end{itemize}
+%
+\end{inlineexercise}%
+\end{sectionptx}
+%
+%
+\typeout{************************************************}
+\typeout{Section 3 Workspace Cases}
+\typeout{************************************************}
+%
+\begin{sectionptx}{Section}{Workspace Cases}{}{Workspace Cases}{}{}{section-workspace-cases}
+%
+%
+\typeout{************************************************}
+\typeout{Worksheet 3.1 Tables in a Worksheet}
+\typeout{************************************************}
+%
+\newgeometry{left=0.75in, right=0.75in, top=0.75in, bottom=0.75in}
+\begin{worksheet-subsection}{Worksheet}{Tables in a Worksheet}{}{Tables in a Worksheet}{}{}{worksheet-tables}
+\begin{divisionexercise}{1}{Paragraph cells.}{}{case-paragraph-cells}%
+Columns with widths, and cells holding paragraphs.  Expect each blank inside its cell, which \LaTeX{} sets as a paragraph column.%
+\begin{center}%
+{\tabularfont%
+\begin{tabular}{AlAlAlA}\ptxhrulethin
+{\bfseries{}Object}&{\bfseries{}Definition}&{\bfseries{}Example}\tabularnewline\ptxhrulethin
+\multicolumn{1}{Am{0.25\linewidth}A}{\raggedright%
+Group%
+}&\multicolumn{1}{m{0.35\linewidth}A}{\raggedright%
+\ptxfillinworkspace{c}{24}{0.9in}%
+}&\multicolumn{1}{m{0.35\linewidth}A}{\raggedright%
+\ptxfillinworkspace{c}{24}{0.9in}%
+}\tabularnewline\ptxhrulethin
+\multicolumn{1}{Ap{0.25\linewidth}A}{\raggedright%
+Ring%
+}&\multicolumn{1}{p{0.35\linewidth}A}{\raggedright%
+\ptxfillinworkspace{t}{24}{0.9in}%
+}&\multicolumn{1}{p{0.35\linewidth}A}{\raggedright%
+\ptxfillinworkspace{t}{24}{0.9in}%
+}\tabularnewline\ptxhrulethin
+\end{tabular}
+}%
+\end{center}%
+\end{divisionexercise}%
+\begin{divisionexercise}{2}{A cell spanning columns.}{}{case-column-span}%
+The last row has one blank across two columns.  Expect it wider than the others, from \ptxmono{@characters}.%
+\begin{center}%
+{\tabularfont%
+\begin{tabular}{AlAlAlA}\ptxhrulethin
+{\bfseries{}Function}&{\bfseries{}Derivative}&{\bfseries{}Antiderivative}\tabularnewline\ptxhrulethin
+\(\sin(x)\)&\ptxfillinworkspace{c}{16}{0.6in}&\ptxfillinworkspace{c}{16}{0.6in}\tabularnewline\ptxhrulethin
+Pattern&\multicolumn{2}{lA}{\ptxfillinworkspace{c}{34}{0.6in}}\tabularnewline\ptxhrulethin
+\end{tabular}
+}%
+\end{center}%
+\end{divisionexercise}%
+\begin{divisionexercise}{3}{Alignment from the table.}{}{case-tabular-valign}%
+The \ptxmono{tabular} has \ptxmono{valign=\textquotedbl{}top\textquotedbl{}} and no row overrides it.  Expect every label at the top of its row.  The blanks have no \ptxmono{@characters}, so they are the default ten characters wide.%
+\begin{center}%
+{\tabularfont%
+\begin{tabular}{ll}\ptxhrulethin
+First&\ptxfillinworkspace{t}{10}{0.75in}\tabularnewline\ptxhrulethin
+Second&\ptxfillinworkspace{t}{10}{0.75in}\tabularnewline\ptxhrulethin
+\end{tabular}
+}%
+\end{center}%
+\end{divisionexercise}%
+\begin{divisionexercise}{4}{Table notes.}{}{case-table-notes}%
+A table with a note, which \LaTeX{} measures in a box.  Expect the note below the table and the blanks unaffected.%
+\begin{center}%
+\begin{lrbox}{\ptxtablenotebox}%
+{\tabularfont%
+\begin{tabular}{ll}\ptxhrulethin
+{\bfseries{}Series\textsuperscript{\textit{a}}}&{\bfseries{}Converges?}\tabularnewline\ptxhrulethin
+\(\sum 1/n^2\)&\ptxfillinworkspace{c}{20}{0.5in}\tabularnewline\ptxhrulethin
+\end{tabular}
+}%
+\end{lrbox}%
+\begin{minipage}{\wd\ptxtablenotebox}
+\usebox{\ptxtablenotebox}\par
+\smallskip%
+{\footnotesize\raggedright%
+\textsuperscript{\textit{a}}\,Assume all terms are positive.\par
+}%
+\end{minipage}%
+\end{center}%
+\end{divisionexercise}%
+\begin{divisionexercise}{5}{A table beside a figure.}{}{case-side-by-side}%
+A \ptxmono{tabular} inside a \ptxmono{sidebyside}.  Expect the blanks to fit the narrower panel.%
+\begin{sidebyside}{2}{0.025}{0.025}{0.05}%
+\begin{sbspanel}{0.45}%
+\par
+\noindent\resizebox{\ifdim\width > \linewidth\linewidth\else\width\fi}{!}{%
+{\centering%
+{\tabularfont%
+\begin{tabular}{ll}\ptxhrulethin
+Mean&\ptxfillinworkspace{c}{14}{0.5in}\tabularnewline\ptxhrulethin
+Median&\ptxfillinworkspace{c}{14}{0.5in}\tabularnewline\ptxhrulethin
+\end{tabular}
+}%
+\par}
+}%
+\par
+\end{sbspanel}%
+\begin{sbspanel}{0.45}%
+Data: \(2, 3, 3, 5, 12\).%
+\end{sbspanel}%
+\end{sidebyside}%
+\end{divisionexercise}%
+\end{worksheet-subsection}
+\restoregeometry
+%
+%
+\typeout{************************************************}
+\typeout{Worksheet 3.2 Other Structures in a Worksheet}
+\typeout{************************************************}
+%
+\newgeometry{left=0.75in, right=0.75in, top=0.75in, bottom=0.75in}
+\begin{worksheet-subsection}{Worksheet}{Other Structures in a Worksheet}{}{Other Structures in a Worksheet}{}{}{worksheet-structures}
+\begin{divisionexercise}{1}{In a paragraph.}{}{case-paragraph}%
+Outside a table, expect the blank to hang down from the top of its line: \ptxfillinworkspace{t}{30}{0.75in}%
+\par
+The next paragraph starts below the blank.%
+\end{divisionexercise}%
+\begin{divisionexercise}{2}{In a list.}{}{case-list}%
+%
+\begin{enumerate}[label={\arabic*.}]
+\item{}State the definition: \ptxfillinworkspace{t}{30}{0.6in}%
+\item{}Give an example: \ptxfillinworkspace{t}{30}{0.6in}%
+\end{enumerate}
+%
+\end{divisionexercise}%
+\begin{divisionexercise}{3}{In tasks.}{}{case-tasks}%
+Expect workspace in each task.%
+\begin{enumerate}[font=\bfseries,label=(\alph*),ref=\alph*]%
+\item{}\begin{center}%
+{\tabularfont%
+\begin{tabular}{ll}\ptxhrulethin
+\(f(x) = x^2\)&\ptxfillinworkspace{c}{20}{0.5in}\tabularnewline\ptxhrulethin
+\end{tabular}
+}%
+\end{center}%
+\item{}Explain: \ptxfillinworkspace{t}{30}{0.5in}%
+\par\smallskip%
+\noindent\textbf{\blocktitlefont Hint}.\hypertarget{case-tasks-4-2}{}\quad{}Ignored in a hint, so expect an ordinary blank: \ptxfillintext{10}.%
+\end{enumerate}%
+\end{divisionexercise}%
+\begin{activity}{Activity}{In a project-like.}{case-activity}%
+An \ptxmono{activity} in a worksheet.  Expect workspace.%
+\begin{center}%
+{\tabularfont%
+\begin{tabular}{ll}\ptxhrulethin
+Prediction&\ptxfillinworkspace{c}{24}{0.6in}\tabularnewline\ptxhrulethin
+\end{tabular}
+}%
+\end{center}%
+\end{activity}%
+\begin{divisionexercise}{4}{Units.}{}{case-units}%
+Centimeters are accepted: \ptxfillinworkspace{t}{10}{1.5cm}%
+\par
+A page percentage is approximated, with a warning, as 1 inch: \ptxfillinworkspace{t}{10}{1in}%
+\par
+A bare number is replaced, with a warning, by 2 inches: \ptxfillinworkspace{t}{10}{2in}%
+\end{divisionexercise}%
+\end{worksheet-subsection}
+\restoregeometry
+%
+%
+\typeout{************************************************}
+\typeout{Handout 3.3 A Handout}
+\typeout{************************************************}
+%
+\newgeometry{left=0.75in, right=0.75in, top=0.75in, bottom=0.75in}
+\begin{handout-subsection}{Handout}{A Handout}{}{A Handout}{}{}{handout-summary}
+Not in an exercise, so expect an ordinary blank and a validation warning: \ptxfillintext{8}.%
+\begin{inlineexercise}{Checkpoint}{In a handout.}{case-handout}%
+\begin{center}%
+{\tabularfont%
+\begin{tabular}{ll}\ptxhrulethin
+Summary&\ptxfillinworkspace{c}{30}{0.75in}\tabularnewline\ptxhrulethin
+\end{tabular}
+}%
+\end{center}%
+\end{inlineexercise}%
+\end{handout-subsection}
+\restoregeometry
+%
+%
+\typeout{************************************************}
+\typeout{Subsection 3.4 A Project Outside a Printout}
+\typeout{************************************************}
+%
+\begin{subsectionptx}{Subsection}{A Project Outside a Printout}{}{A Project Outside a Printout}{}{}{subsection-standalone-project}
+A \ptxmono{project} with workspace is a printout of its own.  Expect it on a page of its own in \LaTeX{}, and a print preview in \ptxabbreviation{HTML}.%
+\newgeometry{left=0.75in, right=0.75in, top=0.75in, bottom=0.75in}
+\begin{project}{Project}{Standalone project.}{case-standalone-project}%
+\begin{center}%
+{\tabularfont%
+\begin{tabular}{ll}\ptxhrulethin
+Hypothesis&\ptxfillinworkspace{c}{28}{0.75in}\tabularnewline\ptxhrulethin
+\end{tabular}
+}%
+\end{center}%
+\end{project}%
+\restoregeometry
+\end{subsectionptx}
+\end{sectionptx}
+\end{document}
